@@ -1,0 +1,396 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #f5f7fb;
+  --card-color: #ffffff;
+  --text-color: #1f2937;
+  --muted-color: #6b7280;
+  --border-color: #d9e2ec;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-bg: #eef2f7;
+  --secondary-text: #334155;
+  --notice-bg: #fff8e1;
+  --notice-border: #facc15;
+  --notice-text: #7c5e10;
+  --success-bg: #ecfdf3;
+  --success-border: #86efac;
+  --danger-bg: #fef2f2;
+  --danger-border: #fca5a5;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  direction: rtl;
+  text-align: right;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 20px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--text-color);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted-color);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.notice-box,
+.form-card,
+.reason-box,
+.difference-box,
+.comparison-card,
+.summary-card {
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.notice-box {
+  background: var(--notice-bg);
+  border-color: var(--notice-border);
+  color: var(--notice-text);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.notice-box h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.notice-box p {
+  margin: 0 0 12px;
+  line-height: 1.8;
+}
+
+.notice-box p:last-child {
+  margin-bottom: 0;
+}
+
+.form-card {
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.form-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: var(--text-color);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.form-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.form-section h3 {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.radio-option input[type="radio"] {
+  width: auto;
+  min-height: auto;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+button {
+  min-height: 50px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.08s ease, opacity 0.2s ease;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+#calculateBtn {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+#calculateBtn:hover {
+  background: var(--primary-hover);
+}
+
+.secondary-btn {
+  background: var(--secondary-bg);
+  color: var(--secondary-text);
+}
+
+.secondary-btn:hover {
+  opacity: 0.9;
+}
+
+.result-section {
+  display: none;
+}
+
+.result-section.show {
+  display: block;
+}
+
+.result-section h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.35rem;
+}
+
+.result-summary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  padding: 18px;
+}
+
+.summary-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted-color);
+  font-size: 0.95rem;
+}
+
+.summary-card strong {
+  font-size: 1.15rem;
+  color: var(--text-color);
+}
+
+.reason-box {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.reason-box h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.reason-box p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.comparison-card {
+  padding: 20px;
+}
+
+.comparison-card h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+}
+
+.comparison-card p {
+  margin: 0 0 10px;
+  line-height: 1.7;
+}
+
+.comparison-card p:last-child {
+  margin-bottom: 0;
+}
+
+.final-pension {
+  margin-top: 14px !important;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  font-size: 1.05rem;
+}
+
+.difference-box {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.difference-box h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.difference-box p {
+  margin: 0 0 10px;
+  line-height: 1.7;
+}
+
+.difference-box p:last-child {
+  margin-bottom: 0;
+}
+
+.old-law-highlight {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+}
+
+.new-law-highlight {
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+}
+
+@media (min-width: 700px) {
+  .page {
+    padding: 24px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .actions {
+    flex-direction: row;
+  }
+
+  .actions button {
+    flex: 1;
+  }
+
+  .result-summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .comparison-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.result-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  background: #0d6efd;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.action-btn:hover {
+  background: #0b5ed7;
+}
+
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+
+  #resultSection,
+  #resultSection * {
+    visibility: visible;
+  }
+
+  #resultSection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+}

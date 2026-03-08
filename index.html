@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>حاسبة تعديلات الضمان الاجتماعي</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+
+      <header class="page-header">
+        <h1>حاسبة تعديلات الضمان الاجتماعي</h1>
+        <p class="subtitle">
+          اعرف هل يشملك القانون القديم أو الجديد، واحسب راتبك التقاعدي التقديري.
+        </p>
+      </header>
+
+      <section class="notice-box">
+        <h2>تنبيه مهم</h2>
+        <p>
+          هذه الحاسبة <strong>تقديرية وليست نهائية</strong>، والهدف منها <strong>التوضيح فقط</strong>
+          ومساعدة المستخدم على فهم التأثير المتوقع للتعديلات المقترحة على قانون الضمان الاجتماعي.
+        </p>
+        <p>
+          النتائج المعروضة تعتمد على المعلومات التي يدخلها المستخدم وعلى افتراض استمرار الاشتراك
+          شهريًا دون انقطاع، وقد تحتوي على أخطاء أو فروقات.
+        </p>
+        <p>
+          كما أن التعديلات على قانون الضمان الاجتماعي <strong>لم يتم إقرارها بشكل نهائي حتى الآن</strong>،
+          وقد يطرأ عليها تغيير قبل اعتمادها رسميًا.
+        </p>
+        <p>
+          <strong>تنويه:</strong> لا تشمل هذه الحاسبة <strong>المهن الخطرة</strong> في حساباتها،
+          ونعتذر عن عدم إمكانية احتسابها ضمن هذه الأداة في الوقت الحالي.
+        </p>
+        <p>
+          لذلك فإن هذه الحاسبة <strong>ليست مرجعًا رسميًا</strong> ولا يجوز الاعتماد عليها
+          لاتخاذ قرارات مالية أو قانونية.
+        </p>
+        <p>
+          <strong>يخلي صاحب هذه الصفحة مسؤوليته القانونية بالكامل عن أي نتائج أو أخطاء قد تظهر في هذه الحاسبة.</strong>
+        </p>
+      </section>
+
+      <form id="retirementForm" class="form-card">
+        <h2>أدخل بياناتك</h2>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="birthDate">تاريخ الميلاد</label>
+            <input type="date" id="birthDate" name="birthDate" required />
+          </div>
+
+          <div class="form-group">
+            <label for="gender">الجنس</label>
+            <select id="gender" name="gender" required>
+              <option value="">اختر الجنس</option>
+              <option value="male">ذكر</option>
+              <option value="female">أنثى</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="subscriptions">عدد الاشتراكات الحالية (بالأشهر)</label>
+            <input type="number" id="subscriptions" name="subscriptions" min="0" required />
+          </div>
+
+          <div class="form-group">
+            <label for="dependents">عدد المعالين</label>
+            <input type="number" id="dependents" name="dependents" min="0" max="3" value="0" required />
+          </div>
+
+          <div class="form-group">
+            <label for="avgSalary5Years">متوسط الراتب المتوقع آخر خمس سنوات</label>
+            <input type="number" id="avgSalary5Years" name="avgSalary5Years" min="0" step="0.01" required />
+          </div>
+
+          <div class="form-group">
+            <label for="avgSalary3Years">متوسط الراتب المتوقع آخر ثلاث سنوات</label>
+            <input type="number" id="avgSalary3Years" name="avgSalary3Years" min="0" step="0.01" required />
+          </div>
+        </div>
+
+<!-- 
+        <div class="form-section">
+          <h3>حسبة التقاعد</h3>
+
+          <label class="radio-option">
+            <input type="radio" name="calculationType" value="earliest" checked />
+            <span>أول استحقاق</span>
+          </label>
+
+          <label class="radio-option">
+            <input type="radio" name="calculationType" value="early" />
+            <span>التقاعد المبكر</span>
+          </label>
+
+          <label class="radio-option">
+            <input type="radio" name="calculationType" value="oldAge" />
+            <span>تقاعد الشيخوخة</span>
+          </label>
+        </div>
+-->
+
+        <div class="actions">
+          <button type="submit" id="calculateBtn">احسب النتيجة</button>
+          <button type="button" id="resetBtn" class="secondary-btn">إعادة تعيين</button>
+        </div>
+      </form>
+
+      <section id="resultSection" class="result-section">
+        <h2>النتيجة</h2>
+
+        <div class="result-summary">
+          <div class="summary-card">
+            <span class="summary-label">القانون المطبق</span>
+            <strong id="appliedLaw">—</strong>
+          </div>
+
+          <div class="summary-card">
+            <span class="summary-label">أول تاريخ استحقاق</span>
+            <strong id="eligibilityDate">—</strong>
+          </div>
+
+          <div class="summary-card">
+            <span class="summary-label">نوع التقاعد</span>
+            <strong id="retirementType">—</strong>
+          </div>
+		  <div class="summary-card">
+  <span class="summary-label">عدد الاشتراكات عند الاستحقاق</span>
+  <strong id="subscriptionsAtEligibility">—</strong>
+</div>
+        </div>
+
+        <div class="reason-box">
+          <h3>سبب النتيجة</h3>
+          <p id="resultReason">—</p>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="comparison-card">
+            <h3>القانون القديم</h3>
+            <p>الراتب الأساسي: <strong id="oldBasicPension">—</strong></p>
+            <p>نسبة الخصم: <strong id="oldDiscountPercent">—</strong></p>
+            <p>مبلغ الخصم: <strong id="oldDiscountAmount">—</strong></p>
+            <p>علاوة المعالين: <strong id="oldDependentsAddition">—</strong></p>
+            <p>الزيادة العامة: <strong id="oldGeneralIncrease">—</strong></p>
+			<p>عدد الاشتراكات المعتمد: <strong id="oldUsedSubscriptions">—</strong></p>
+			<p>سن الشيخوخة الوجوبي المعتمد: <strong id="oldMandatoryAge">—</strong></p>
+<p>سبب الخصم: <strong id="oldDiscountReason">—</strong></p>
+            <p class="final-pension">الراتب النهائي: <strong id="oldFinalPension">—</strong></p>
+          </div>
+
+          <div class="comparison-card">
+            <h3>القانون الجديد</h3>
+            <p>الراتب الأساسي: <strong id="newBasicPension">—</strong></p>
+            <p>نسبة الخصم: <strong id="newDiscountPercent">—</strong></p>
+            <p>مبلغ الخصم: <strong id="newDiscountAmount">—</strong></p>
+            <p>علاوة المعالين: <strong id="newDependentsAddition">—</strong></p>
+            <p>الزيادة العامة: <strong id="newGeneralIncrease">—</strong></p>
+			<p>عدد الاشتراكات المعتمد: <strong id="newUsedSubscriptions">—</strong></p>
+			<p>سن الشيخوخة الوجوبي المعتمد: <strong id="newMandatoryAge">—</strong></p>
+<p>سبب الخصم: <strong id="newDiscountReason">—</strong></p>
+            <p class="final-pension">الراتب النهائي: <strong id="newFinalPension">—</strong></p>
+          </div>
+        </div>
+
+        <div class="difference-box">
+          <h3>الفرق بين القانونين</h3>
+          <p>الفرق الشهري: <strong id="monthlyDifference">—</strong></p>
+          <p>الفرق السنوي: <strong id="yearlyDifference">—</strong></p>
+        </div>
+		
+		
+		<div class="result-actions">
+
+  <button id="printResultBtn" class="action-btn">
+    🖨️ طباعة النتائج
+  </button>
+
+  <button id="shareResultBtn" class="action-btn">
+    📤 مشاركة النتائج
+  </button>
+
+</div>
+      </section>
+	  
+	  
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
